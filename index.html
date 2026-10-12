@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bless-Growth Academy</title>
+<meta name="description" content="Live online classes in digital marketing, AI, investing, forex, YouTube and business growth.">
+<style>
+  :root { --green:#0f7b4f; --dark:#0b3d2a; --light:#eef7f2; --text:#1b2a24; --muted:#5b6b64; --border:#d5e3db; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color:var(--text); line-height:1.6; background:#fff; }
+  header { background:var(--dark); color:#fff; padding:14px 20px; font-weight:700; font-size:18px; }
+  .hero { background:var(--light); padding:48px 20px; text-align:center; }
+  .hero h1 { margin:0 0 12px; font-size:30px; line-height:1.2; color:var(--dark); }
+  .hero p { margin:0 auto 24px; max-width:520px; color:var(--muted); font-size:17px; }
+  .btn { display:inline-block; background:var(--green); color:#fff; border:0; padding:14px 26px; border-radius:8px; font-size:16px; font-weight:600; cursor:pointer; text-decoration:none; }
+  .btn:disabled { opacity:.6; cursor:not-allowed; }
+  .btn.small { padding:10px 16px; font-size:14px; }
+  section { padding:36px 20px; max-width:760px; margin:0 auto; }
+  h2 { margin:0 0 6px; font-size:24px; color:var(--dark); }
+  .sub { margin:0 0 20px; color:var(--muted); }
+  .card { border:1px solid var(--border); border-radius:12px; padding:16px; margin-bottom:14px; }
+  .card h3 { margin:0 0 6px; font-size:18px; }
+  .card p { margin:0 0 12px; color:var(--muted); font-size:15px; }
+  .note { background:#fff8e6; border:1px solid #f0d98a; border-radius:8px; padding:10px 12px; font-size:13px; color:#6b5200; margin:0 0 12px; }
+  form { border:1px solid var(--border); border-radius:12px; padding:18px; background:#fff; }
+  label { display:block; font-weight:600; margin:14px 0 6px; font-size:15px; }
+  input[type=text], input[type=email], input[type=tel], select, textarea { width:100%; padding:12px; font-size:16px; border:1px solid #b9cdc2; border-radius:8px; font-family:inherit; background:#fff; }
+  textarea { min-height:80px; resize:vertical; }
+  .check { display:flex; gap:10px; align-items:flex-start; margin:18px 0; font-weight:400; font-size:14px; }
+  .check input { margin-top:4px; width:20px; height:20px; flex-shrink:0; }
+  .msg { margin-top:14px; padding:12px; border-radius:8px; font-size:15px; display:none; }
+  .msg.ok { background:#e6f6ec; color:#0b5a37; display:block; }
+  .msg.err { background:#fdeaea; color:#8a1f1f; display:block; }
+  footer { background:var(--dark); color:#cfe5da; padding:24px 20px; font-size:13px; text-align:center; }
+  footer a { color:#fff; }
+  .priv { max-width:760px; margin:0 auto; padding:0 20px 30px; font-size:13px; color:var(--muted); }
+  .priv summary { cursor:pointer; font-weight:600; color:var(--dark); }
+  :focus-visible { outline:3px solid #f2b600; outline-offset:2px; }
+</style>
+</head>
+<body>
+
+<header>Bless-Growth Academy</header>
+
+<div class="hero">
+  <h1>Learn skills that grow your income</h1>
+  <p>Live online classes with real instructors. Pick a course, tell us about yourself, and your instructor will contact you with your class link.</p>
+  <a class="btn" href="#courses">Get started</a>
+</div>
+
+<section id="courses">
+  <h2>Our courses</h2>
+  <p class="sub">Choose the one that fits your goal.</p>
+  <div id="courseList"></div>
+</section>
+
+<section id="enroll">
+  <h2>Enroll now</h2>
+  <p class="sub">Fill in the form. An instructor will contact you to confirm and send your class link.</p>
+
+  <form id="enrollForm" novalidate>
+    <label for="course">Course</label>
+    <select id="course" required></select>
+    <div id="riskNote" class="note" style="display:none">
+      Risk notice: trading and investing involve risk, including loss of money. This course is for education only. We do not promise profits, and nothing taught is financial advice.
+    </div>
+
+    <label for="full_name">Full name</label>
+    <input type="text" id="full_name" autocomplete="name" maxlength="100" required>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" autocomplete="email" maxlength="150" required>
+
+    <label for="phone">Phone / WhatsApp</label>
+    <input type="tel" id="phone" autocomplete="tel" maxlength="20" placeholder="e.g. +234 801 234 5678" required>
+
+    <label for="experience_level">Experience level</label>
+    <select id="experience_level" required>
+      <option value="">Select level</option>
+      <option value="beginner">Beginner</option>
+      <option value="intermediate">Intermediate</option>
+      <option value="advanced">Advanced</option>
+    </select>
+
+    <label for="goal">What is your goal?</label>
+    <textarea id="goal" maxlength="500" placeholder="Tell us what you want to achieve"></textarea>
+
+    <label for="preferred_time">Preferred class time</label>
+    <input type="text" id="preferred_time" maxlength="100" placeholder="e.g. Weekdays after 6pm">
+
+    <label class="check" for="consent">
+      <input type="checkbox" id="consent" required>
+      <span>I agree that Bless-Growth Academy may store my details and contact me about my enrollment.</span>
+    </label>
+
+    <button class="btn" type="submit" id="submitBtn">Submit enrollment</button>
+    <div id="formMsg" class="msg" role="status" aria-live="polite"></div>
+  </form>
+</section>
+
+<div class="priv">
+  <details>
+    <summary>Privacy notice</summary>
+    <p>We collect your name, email, phone number, experience level, goal, and preferred time only to enroll you and contact you about your class. We do not sell your information. To ask for your details to be corrected or deleted, contact the academy.</p>
+  </details>
+</div>
+
+<footer>
+  &copy; Bless-Growth Academy. Courses are for education only and do not guarantee income or profits.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  var SUPABASE_URL = "https://laouapijfhginzuftsjd.supabase.co";
+  var SUPABASE_KEY = "sb_publishable_Q0D5osMtuSszT4nzm4CSIQ_KC2SRhpC";
+  var db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  var courses = [
+    { name: "Digital Marketing", desc: "Learn to promote products and businesses online: social media, content, ads, and email.", risk: false },
+    { name: "AI and Automation", desc: "Use AI tools and automation to save time, work smarter, and build income opportunities.", risk: false },
+    { name: "Stock Market Investment", desc: "Understand how the stock market works and how to invest with a sound plan.", risk: true },
+    { name: "Forex (Basic to Advanced)", desc: "Learn forex trading from the basics to advanced strategies and risk management.", risk: true },
+    { name: "YouTube and Automation (Basic to Advanced)", desc: "Start and grow a YouTube channel, then automate content and workflows.", risk: false },
+    { name: "Diploma in Business Growth Strategies", desc: "A structured program on growing a business: marketing, sales, systems, and leadership.", risk: false }
+  ];
+
+  var list = document.getElementById("courseList");
+  var select = document.getElementById("course");
+  var riskNote = document.getElementById("riskNote");
+
+  var placeholder = document.createElement("option");
+  placeholder.value = "";
+  placeholder.textContent = "Select a course";
+  select.appendChild(placeholder);
+
+  courses.forEach(function (c) {
+    var card = document.createElement("div");
+    card.className = "card";
+    var h3 = document.createElement("h3");
+    h3.textContent = c.name;
+    var p = document.createElement("p");
+    p.textContent = c.desc + " Price and schedule are confirmed by your instructor.";
+    card.appendChild(h3);
+    card.appendChild(p);
+    if (c.risk) {
+      var n = document.createElement("div");
+      n.className = "note";
+      n.textContent = "Risk notice: this involves financial risk. No profits are promised.";
+      card.appendChild(n);
+    }
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "btn small";
+    b.textContent = "Enroll in this course";
+    b.addEventListener("click", function () {
+      select.value = c.name;
+      updateRisk();
+      document.getElementById("enroll").scrollIntoView({ behavior: "smooth" });
+    });
+    card.appendChild(b);
+    list.appendChild(card);
+
+    var opt = document.createElement("option");
+    opt.value = c.name;
+    opt.textContent = c.name;
+    select.appendChild(opt);
+  });
+
+  function updateRisk() {
+    var found = courses.filter(function (c) { return c.name === select.value; })[0];
+    riskNote.style.display = found && found.risk ? "block" : "none";
+  }
+  select.addEventListener("change", updateRisk);
+
+  var form = document.getElementById("enrollForm");
+  var msg = document.getElementById("formMsg");
+  var btn = document.getElementById("submitBtn");
+
+  function show(text, ok) {
+    msg.textContent = text;
+    msg.className = "msg " + (ok ? "ok" : "err");
+  }
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    msg.className = "msg";
+
+    var data = {
+      course: select.value,
+      full_name: document.getElementById("full_name").value.trim(),
+      email: document.getElementById("email").value.trim(),
+      phone: document.getElementById("phone").value.trim(),
+      experience_level: document.getElementById("experience_level").value,
+      goal: document.getElementById("goal").value.trim() || null,
+      preferred_time: document.getElementById("preferred_time").value.trim() || null,
+      consent_given: document.getElementById("consent").checked
+    };
+
+    if (!data.course) return show("Please choose a course.", false);
+    if (data.full_name.length < 2) return show("Please enter your full name.", false);
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email)) return show("Please enter a valid email.", false);
+    if (data.phone.length < 6) return show("Please enter a valid phone number.", false);
+    if (!data.experience_level) return show("Please select your experience level.", false);
+    if (!data.consent_given) return show("Please tick the consent box to continue.", false);
+
+    btn.disabled = true;
+    btn.textContent = "Submitting...";
+
+    var result = await db.from("enrollments").insert(data);
+
+    btn.disabled = false;
+    btn.textContent = "Submit enrollment";
+
+    if (result.error) {
+      show("Sorry, something went wrong. Please try again in a moment.", false);
+      return;
+    }
+    form.reset();
+    updateRisk();
+    show("Thank you! Your enrollment has been received. Your instructor will contact you soon with your class link.", true);
+  });
+</script>
+</body>
+</html>
